@@ -14,15 +14,13 @@ ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "https://chncam.netlify.app",
-    "https://chncam.uk"# ← CHANGE THIS to your Netlify URL
-    # Add more origins as needed
+    "https://chncam.uk"
 ]
 
-# CORS
+# CORS - ONLY ONE allow_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=ALLOWED_ORIGINS,  # ← Use this ONE
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
