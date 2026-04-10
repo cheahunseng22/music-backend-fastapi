@@ -1,10 +1,9 @@
 from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 from sqlalchemy import or_
-from database import get_db
-from models import Track, Category, ArtistGroup, TrackDetail, NewRelease
-from schemas import TrackResponse, TrackDetailResponse, CategoryResponse, ArtistResponse, NewReleaseResponse
-
+from ..database import get_db
+from ..models import Track, Category, ArtistGroup, TrackDetail, NewRelease
+from ..schemas import TrackResponse, TrackDetailResponse, CategoryResponse, ArtistResponse, NewReleaseResponse
 
 router = APIRouter(prefix="/api", tags=["Public"])
 

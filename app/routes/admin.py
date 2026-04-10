@@ -3,9 +3,9 @@ from sqlalchemy.orm import Session
 from datetime import date
 import os
 
-from database import get_db
-from models import Track, Category, ArtistGroup, TrackDetail, NewRelease
-from schemas import TrackCreate, TrackDetailCreate, CategoryCreate, ArtistCreate
+from ..database import get_db
+from ..models import Track, Category, ArtistGroup, TrackDetail, NewRelease
+from ..schemas import TrackCreate, TrackDetailCreate, CategoryCreate, ArtistCreate
 
 router = APIRouter(prefix="/api/admin", tags=["Admin"])
 
