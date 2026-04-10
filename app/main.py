@@ -17,6 +17,7 @@ ALLOWED_ORIGINS = [
     "https://chncam.uk"
 ]
 
+# CORS middleware - ONLY ONE allow_origins
 app.add_middleware(
     CORSMiddleware,
     allow_origins=ALLOWED_ORIGINS,
