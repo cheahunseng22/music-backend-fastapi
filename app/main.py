@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from routes import public, admin
-from database import engine
-import models
+from .routes import public, admin
+from .database import engine
+from . import models
 
 # Create tables
 models.Base.metadata.create_all(bind=engine)
@@ -14,14 +14,11 @@ ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://localhost:3000",
     "https://chncam.netlify.app",
-    "https://chncam.uk"# ← CHANGE THIS to your Netlify URL
-    # Add more origins as needed
+    "https://chncam.uk"
 ]
 
-# CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
     allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
