@@ -19,7 +19,10 @@ ALLOWED_ADMIN_IPS = [
     '172.16.1.10',         # VMware VMnet1
     '172.16.10.1',         # VMware VMnet2
     '172.16.20.1',         # VMware VMnet3
-    '192.168.1.100',       # Common local IP (add if needed)
+    '192.168.1.100',   
+        '35.197.0.0/16',
+    '34.120.0.0/16',
+    '35.197.0.0/16',# Common local IP (add if needed)
 ]
 
 # Allowed domains (add your domain when deployed)
@@ -30,6 +33,8 @@ ALLOWED_DOMAINS = [
     # Add your production domain when deployed:
     # 'yourdomain.com',
     # 'www.yourdomain.com',
+     'chncam.netlify.app',        # ← ADD THIS
+    'cheahun.netlify.app',       # ← ADD THIS
 ]
 
 def verify_admin_access(request: Request):
