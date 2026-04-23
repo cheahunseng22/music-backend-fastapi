@@ -36,6 +36,7 @@ ALLOWED_DOMAINS = [
      'chncam.netlify.app',        # ← ADD THIS
     'cheahun.netlify.app',       # ← ADD THIS
     'www.chncam.site',
+    'chncam.site',
 ]
 
 def verify_admin_access(request: Request):
