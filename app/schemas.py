@@ -45,6 +45,7 @@ class TrackResponse(BaseModel):
     duration: Optional[str] = None
     category: Optional[str] = None
     artist_name: Optional[str] = None
+    total_plays: Optional[int] = 0 
     
     class Config:
         from_attributes = True

@@ -7,11 +7,39 @@ from ..schemas import TrackResponse, TrackDetailResponse, CategoryResponse, Arti
 
 router = APIRouter(prefix="/api", tags=["Public"])
 
+
+@router.put("/tracks/{track_id}/play")
+def increment_play_count(
+    track_id: int,
+    db: Session = Depends(get_db)
+):
+    """Public endpoint to increment track play count when clicked"""
+    # Get the track detail (where total_plays actually lives)
+    track_detail = db.query(TrackDetail).filter(TrackDetail.track_id == track_id).first()
+    
+    if not track_detail:
+        # If no detail exists, create one
+        track_detail = TrackDetail(track_id=track_id, total_plays=1)
+        db.add(track_detail)
+    else:
+        # Increment play count by 1
+        track_detail.total_plays = (track_detail.total_plays or 0) + 1
+    
+    db.commit()
+    db.refresh(track_detail)
+    
+    return {
+        "success": True,
+        "track_id": track_id,
+        "total_plays": track_detail.total_plays
+    }
+
+
 # 1. Get all tracks (for homepage cards)
 @router.get("/tracks", response_model=list[TrackResponse])
 def get_all_tracks(db: Session = Depends(get_db)):
     tracks = db.query(Track).filter(Track.is_published == True).all()
-    
+
     result = []
     for track in tracks:
         result.append({
@@ -20,7 +48,8 @@ def get_all_tracks(db: Session = Depends(get_db)):
             "cover_image": track.cover_image,
             "duration": track.duration,
             "category": track.category.name if track.category else None,
-            "artist_name": track.artist.name if track.artist else None
+            "artist_name": track.artist.name if track.artist else None,
+            "total_plays": track.detail.total_plays if track.detail else 0
         })
     return result
 
